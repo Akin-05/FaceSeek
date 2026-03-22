@@ -1,0 +1,23 @@
+
+:root {
+    --bg: #0a0a0f;
+    --accent: #c8f04d;
+    --text: #f0eee8;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: 100vh;
+}
+
+* {
+    box-sizing: box-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: var(--accent);
+
+}
