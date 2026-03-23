@@ -1,23 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;600&display=swap');
 
+/* VARIABLES */
 :root {
-    --bg: #0a0a0f;
-    --accent: #c8f04d;
-    --text: #f0eee8;
+    --bg: #ddeeff;
+    --white: #ffffff;
+    --blue:#2471a3;
+    --blue-light: #aed6f1;
+    --blue-dark: #1a6394;;
+    --text-dark: #1b2631;
+    --text-gray: #566573;
+    --border: #a9cce3;
+    --font: 'DM Sans', Arial, sans-serif;
+    --hero-bg:  #c8e3f5;
 }
 
-body {
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: 100vh;
-}
-
+/* Reseting browser spacing */
 * {
-    box-sizing: box-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    color: var(--accent);
+/* Base style for whole page */
+body {
+    background: var(--hero-bg);
+    color: var(--text-dark);
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
+
+/* --- SECTION 1 -> HERO --- */
+.hero{
+    background-color: var(--hero-bg);
+    text-align: center;
+    /* max-width: 700px; */
+    padding: 90px 24px 80px;
+}
+
+.hero h1 {
+    font-family: 'Space Grotesk', sans-erif;
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--blue-dark);
+    letter-spacing: 1px;
+}
+
+
+.hero .subtitle {
+    font-size: 17px;
+    color: var(--text-gray);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.75;
+}
+
+/* Button Settings */
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+.btn-primary {
+    display: inline-block;
+    background-color: var(--blue);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 44px;
+    border-radius: 100px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--blue-dark);
+    transform: translateY(-2px);
+}
+
+/*Two column Wrapper */
+.two-col-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    max-width: 1300px;
+    padding: 0 24px;
+    margin: 0 auto;
+}
+
+
+/* --- SECTION 2 -> HOW IT WORKS? --- */
+.how-section {
+    background-color: var(--bg);
+    padding: 72px 32px 0;
+    /* max-width: 1050px; */
+    text-align: center;
+}
+
+.how-section h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.section-sub {
+    font-size: 15px;
+    color: var(--text-gray);
+    margin-bottom: 36px;
+}
+
+/* 3 Cards Row */
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* text-align: left; */
+}
+
+.step-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    position: relative; /* for step number positioning */
+    text-align: left;
+}
+
+
+.step-number {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--blue-light);
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card Title */
+.step-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+    padding-right: 40px;
+}
+
+/* Card Description */
+.step-card p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.65;
+}
+
+
+/* --- SECTION 3 -> PRIVACY --- */
+.privacy-section {
+    background-color: var(--bg);
+    padding:  72px 0 72px 32px;
+    text-align: center;
+    border-left: 1px solid var(--border);
+}
+
+.privacy-section h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+/* 4 Privacy Cards */
+.privacy-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    text-align: left;
+    align-items: start;
+}
+
+.card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+}
+
+/* Card Title */
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+
+/* Card Description */
+.card p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.65;
+}
+
+
+/* --- TABLET VIEW --- */
+@media (max-width: 960px) {
+    .two-col-sections {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+    
+    .how-section {
+        padding: 60px 0 40px;
+        border-bottom: 1px solid var(--border); 
+    }
+ 
+    .privacy-section {
+        padding: 40px 0 60px;
+        border-left: none;
+    }
+}
+
+
+/* --- MOBILE VIEW --- */
+@media (max-width: 900px) {
+    .two-col-sections {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 680px) {
+ 
+  .hero h1 {
+    font-size: 32px;
+  }
+ 
+  .privacy-cards {
+    grid-template-columns: 1fr;
+  }
 }
