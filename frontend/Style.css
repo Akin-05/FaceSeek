@@ -253,3 +253,220 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- PAGE 2 - GET STARTED --- */
+body.page2 {
+    min-height: 1000vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.back-bar {
+    padding: 20px 32px;
+    background: var(--hero-bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.page-hero {
+    background: var(--hero-bg);
+    text-align: center;
+    padding: 56px 24px 52px;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 39px;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    line-height: 1.2
+}
+
+.page-hero h1 span {
+    color: var(--blue-dark);
+}
+
+.page-hero p {
+    font-size: 16px;
+    color: var(--text-gray);
+    max-width: 460px;
+    margin: 0 auto;
+}
+
+.options-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 24px 72px;
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    max-width: 860px;
+    align-items: center;
+}
+
+.option-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50px;
+    background: var(--hero-bg);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.icon-wrap svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--blue);
+}
+
+.option-card h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+    position: relative;
+    z-index: 1;
+}
+
+.option-card p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.7;
+    max-width: 260px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 100px;
+    position: relative;
+    z-index: 1;
+    margin-top: 4px;
+}
+
+.badeg-new {
+    background: var(--blue-light);
+    color: var(--blue-dark);
+}
+
+,badge-existing {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.divider-or {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--text-gray);
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 8px;
+    opacity: 0.7;
+}
+
+.divider-line {
+    width: 1px;
+    height: 80px;
+    background: var(-border);
+}
+
+.crad-arrow {
+    margin-top: auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.car-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--text-gray);
+}
+
+.note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-gray);
+    padding: 0 24px 40px;
+}
+
+.note span {
+    color: var(--blue);
+    font-weight: 600;
+}
+
+/* --- PAGE 2 MOBILE --- */
+@media (max-width: 640px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+ 
+    .divider-or {
+        flex-direction: row;
+    }
+ 
+    .divider-line {
+        width: 60px;
+        height: 1px;
+    }
+ 
+    .page-hero h1 {
+        font-size: 28px;
+    }
+ 
+    .option-card {
+        padding: 30px 24px;
+    }
+}
