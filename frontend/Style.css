@@ -898,3 +898,156 @@ body.page2 {
         padding: 36px 24px;
     }
 }
+
+/* --- PAGE 4 - ACCESS ALBUM --- */
+.pwd-box {
+    position: relative;
+}
+
+.pwd-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.pwd-toggle:hover {
+    color: var(--blue);
+    background: var(--blue-light);
+}
+
+.pwd-toggle svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+}
+
+.error-banner {
+    display: none;
+    background: #fdecea;
+    border: 1px solid #f5c6c2;
+    border-radius: 12px;
+    padding: 13px 16px;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.error-banner.show {
+    display: flex;
+    animation: shakeX 0.4s ease;
+}
+
+.error-banner p {
+    font-size: 13px;
+    color: #7f1d1d;
+    line-height: 1.55;
+}
+
+.error-banner strong {
+    font-weight: 700;
+}
+
+@keyframes shakeX {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+}
+
+.login-success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(200, 227, 245, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-success-overlay.show {
+    display: flex;
+    animation: overlayIn 0.3s ease;
+}
+
+.login-success-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 48px rgba(36, 113, 163, 0.13);
+    animation: cardIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.login-success-card .success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    border: 1.5px solid #a5d6a7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.login-success-card .success-icon svg {
+    width: 32px;
+    height: 32px;
+    stroke: #2e7d32;
+}
+
+.login-success-card h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.login-success-card > p {
+    font-size: 14px;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.login-album-info {
+    background: var(--hero-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+.login-album-info-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.login-album-info-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
