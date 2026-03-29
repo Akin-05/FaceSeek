@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FaceSeek - Upload Photos</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="Style.css">
+    </head>
+
+    <body>
+
+        <div class="back-bar">
+            <a href="Page3.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+        </div>
+
+        <div class="album-banner">
+            <span class="album-banner-label">Album:</span>
+            <span class="album-banner-name" id="bannerAlbumName">-</span>
+        </div>
+
+        <div class="upload-wrapper">
+            <div class="upload-card">
+
+                <div class="upload-card-header">
+                    <div class="upload-form-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="3"/>
+                            <path d="M3 9l4-4 4 4 4-4 4 4"/>
+                            <path d="M3 15l4 4 4-4 4 4 4-4"/>
+                        </svg>
+                    </div>
+                    <h2>Upload Photos</h2>
+                    <p>Add photos to your album. You can upload upto 100 photos as once.</p>
+                </div>
+
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/*" multiple />
+                    <div class="drop-zone-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 16 12 12 8 16"/>
+                            <line x1="12" y1="12" x2="12" y2="21"/>
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                        </svg>
+                    </div>
+                    <p><strong>Click to browse</strong> or drag & drop photos here</p>
+                    <p class="drop-zone-hint">JPG, PNG, WEBP, HEIC. Max 100 photos</p>
+                </div>
+
+                <div class="limit-warning" id="limitWarning">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>Maximum 100 photos allowed. Extra photos were not added.</span>
+                </div>
+
+                <div class="photo-count-bar" id="photoCountBar">
+                    <span class="photo-count-text"><span id=photoCount>0</span> photo(s) selected</span>
+                    <button class="clear-all-btn" onclick="clearAll()">Remove all</button>
+                </div>
+
+                <div class="thumb-grid" id="thumbGrid"></div>
+
+                <button class="btn-submit" onclick="uploadPhotos()">Upload Photos</button>
+            
+            </div>
+        </div>
+
+        <div class="upload-success-overlay" id="uploadSuccessOverlay">
+            <div class="upload-success-card">
+
+                <button class="overlay-close-btn" onclick="document.getElementById('uploadSuccessOverlay').classList.remove('show')" title="Close">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+
+                <h2>Album created!</h2>
+                <p>Your photos have been saved. Keep your access code safe - you'll need it to return to this album.</p>
+
+                <div class="upload-summary">
+                    <div class="upload-summary-row">
+                        <div>
+                            <div class="upload-summary-label">Album Name</div>
+                            <div class="upload-summary-value" id="finalAlbumName">-</div>
+                        </div>
+                    </div>
+                    <div class="upload-summary-row">
+                        <div>
+                            <div class="upload-summary-label">Access Code</div>
+                            <div class="upload-summary-value mono" id="finalAlbumCode">-</div>
+                        </div>
+                        <button class="code-copy-btn"  onclick="copyFinalCode()" title="Copy code">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="upload-summary-row">
+                        <div>
+                            <div class="upload-summary-label">Photos Uploaded</div>
+                            <div class="upload-summary-value" id="finalPhotoCount">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-warning">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>This code will <strong>not be shown again</strong>. Screenshot or copy it before continuing.</span>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="Script.js"></script>
+
+    </body>
+
+</html>
