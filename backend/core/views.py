@@ -270,3 +270,6 @@ def search_face(request):
         },
         status=status.HTTP_200_OK
     )
+@api_view(['GET'])
+def health_check(request):
+    return Response({'status': 'ok'}, status=status.HTTP_200_OK)
