@@ -21,7 +21,7 @@
     padding: 0;
 }
 
-/* Base style for whole page */
+
 body {
     background: var(--hero-bg);
     color: var(--text-dark);

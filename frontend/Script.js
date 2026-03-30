@@ -776,7 +776,7 @@ function downloadPhoto(dataUrl, filename) {
     document.body.removeChild(a);
 }
 
-// ── Lightbox ──
+
 function openLightbox(src, caption) {
     document.getElementById('lightboxImg').src     = src;
     document.getElementById('lightboxCaption').textContent = caption || '';
