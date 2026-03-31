@@ -26,6 +26,11 @@ function flashInvalid(el) {
     }, 2000);
 }
 
+// ── Continue to upload page ──
+function continueToUpload() {
+    window.location.href = 'upload-photos.html';
+}
+
 // ── Create Album — calls Django API ──
 async function createAlbum() {
     const nameInput = document.getElementById('albumName');
@@ -33,26 +38,22 @@ async function createAlbum() {
     const name = nameInput.value.trim();
     const code = codeInput.value.trim();
 
-    // Validate inputs
     if (!name) {
         flashInvalid(nameInput);
         nameInput.focus();
         return;
     }
-
     if (!code) {
         flashInvalid(codeInput);
         codeInput.focus();
         return;
     }
-
     if (code.length < 8) {
         flashInvalid(codeInput);
         alert('Password must be at least 8 characters.');
         return;
     }
 
-    // Show loading state
     const btn = document.querySelector('.create-btn') || document.querySelector('button[onclick="createAlbum()"]');
     if (btn) {
         btn.disabled = true;
@@ -65,19 +66,20 @@ async function createAlbum() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ album_name: name, password: code })
         });
-
         const data = await response.json();
 
         if (response.ok) {
-            // Store album name so upload-photos page can use it
             sessionStorage.setItem('albumName', name);
-
-            // Populate and show success overlay
             document.getElementById('successAlbumName').textContent = name;
             document.getElementById('successCode').textContent = code;
             document.getElementById('successOverlay').classList.add('show');
+
+            // Auto-redirect after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'upload-photos.html';
+            }, 3000);
+
         } else {
-            // Show error from backend (e.g. "Album name already taken")
             alert(data.error || 'Failed to create album. Please try again.');
         }
     } catch (err) {
@@ -95,11 +97,9 @@ async function createAlbum() {
 document.addEventListener('DOMContentLoaded', function () {
     const nameInput = document.getElementById('albumName');
     const codeInput = document.getElementById('generatedCode');
-
     if (nameInput) nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') createAlbum(); });
     if (codeInput) codeInput.addEventListener('keydown', e => { if (e.key === 'Enter') createAlbum(); });
 
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
