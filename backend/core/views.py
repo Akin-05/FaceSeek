@@ -4,10 +4,32 @@ from rest_framework import status
 from .models import Album, Photo
 from .serializers import PhotoSerializer, AlbumSerializer, SearchResultSerializer
 from .utils import get_face_embedding, find_matches
+from django.utils import timezone
+from datetime import timedelta
+from django.core.management import call_command
 import os
 
 
-# ── Album Create ─────────────────────────────────────────
+# ── Cleanup Helper ────────────────────────────────────────
+def cleanup_expired_albums():
+    """Delete albums older than 24 hours"""
+    call_command('delete_expired_albums')
+
+
+# ── Health Check ──────────────────────────────────────────
+@api_view(['GET'])
+def health_check(request):
+    """
+    Health check endpoint.
+    GET /api/health/
+    """
+    return Response(
+        {'status': 'ok'},
+        status=status.HTTP_200_OK
+    )
+
+
+# ── Album Create ──────────────────────────────────────────
 @api_view(['POST'])
 def create_album(request):
     """
@@ -44,10 +66,14 @@ def create_album(request):
     album.set_password(password)
     album.save()
 
+    # calculate expiry time
+    expiry_time = album.created_at + timedelta(hours=24)
+
     return Response(
         {
             'message': 'Album created successfully!',
-            'album_name': album.name
+            'album_name': album.name,
+            'expires_at': expiry_time,
         },
         status=status.HTTP_201_CREATED
     )
@@ -87,10 +113,17 @@ def access_album(request):
             status=status.HTTP_401_UNAUTHORIZED
         )
 
+    # calculate expiry
+    expiry_time = album.created_at + timedelta(hours=24)
+    time_remaining = expiry_time - timezone.now()
+    hours_remaining = max(0, int(time_remaining.total_seconds() / 3600))
+    minutes_remaining = max(0, int((time_remaining.total_seconds() % 3600) / 60))
+
     return Response(
         {
             'message': 'Access granted!',
-            'album_name': album.name
+            'album_name': album.name,
+            'expires_in': f'{hours_remaining}h {minutes_remaining}m',
         },
         status=status.HTTP_200_OK
     )
@@ -165,11 +198,14 @@ def get_album_photos(request, album_name):
     Get all photos in an album.
     GET /api/photos/<album_name>/
     """
+    # run cleanup on every album view
+    cleanup_expired_albums()
+
     try:
         album = Album.objects.get(name=album_name)
     except Album.DoesNotExist:
         return Response(
-            {'error': 'Album not found.'},
+            {'error': 'Album not found or expired.'},
             status=status.HTTP_404_NOT_FOUND
         )
 
@@ -180,11 +216,19 @@ def get_album_photos(request, album_name):
         context={'request': request}
     )
 
+    # calculate expiry time
+    expiry_time = album.created_at + timedelta(hours=24)
+    time_remaining = expiry_time - timezone.now()
+    hours_remaining = max(0, int(time_remaining.total_seconds() / 3600))
+    minutes_remaining = max(0, int((time_remaining.total_seconds() % 3600) / 60))
+
     return Response(
         {
             'album_name': album.name,
             'photo_count': photos.count(),
-            'photos': serializer.data
+            'photos': serializer.data,
+            'expires_in': f'{hours_remaining}h {minutes_remaining}m',
+            'created_at': album.created_at,
         },
         status=status.HTTP_200_OK
     )
@@ -254,8 +298,7 @@ def search_face(request):
     results = []
     for match in matches:
         photo = match['photo']
-        request_context = {'request': request}
-        serializer = PhotoSerializer(photo, context=request_context)
+        serializer = PhotoSerializer(photo, context={'request': request})
         results.append({
             'id': photo.id,
             'image_url': serializer.data['image_url'],
@@ -270,6 +313,3 @@ def search_face(request):
         },
         status=status.HTTP_200_OK
     )
-@api_view(['GET'])
-def health_check(request):
-    return Response({'status': 'ok'}, status=status.HTTP_200_OK)
