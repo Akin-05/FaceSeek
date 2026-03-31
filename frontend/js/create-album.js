@@ -32,7 +32,9 @@ function continueToUpload() {
 }
 
 // ── Create Album — calls Django API ──
-async function createAlbum() {
+async function createAlbum(e) {
+    if (e) e.preventDefault();
+
     const nameInput = document.getElementById('albumName');
     const codeInput = document.getElementById('generatedCode');
     const name = nameInput.value.trim();
@@ -54,7 +56,7 @@ async function createAlbum() {
         return;
     }
 
-    const btn = document.querySelector('.create-btn') || document.querySelector('button[onclick="createAlbum()"]');
+    const btn = document.querySelector('.btn-submit');
     if (btn) {
         btn.disabled = true;
         btn.textContent = 'Creating...';
@@ -74,10 +76,10 @@ async function createAlbum() {
             document.getElementById('successCode').textContent = code;
             document.getElementById('successOverlay').classList.add('show');
 
-            // Auto-redirect after 3 seconds
+            // Auto-redirect after 4 seconds
             setTimeout(() => {
                 window.location.href = 'upload-photos.html';
-            }, 3000);
+            }, 4000);
 
         } else {
             alert(data.error || 'Failed to create album. Please try again.');

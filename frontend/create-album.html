@@ -74,7 +74,7 @@
                             autocomplete="off"
                             style="letter-spacing: 0.1em; font-family: var(--mono-font, monospace);"
                         />
-                        <button class="code-btn" id="toggleCodeBtn" title="Show/Hide" onclick="toggleCodeVisibility()">
+                        <button type="button" class="code-btn" id="toggleCodeBtn" title="Show/Hide" onclick="toggleCodeVisibility()">
                             <svg id="iconShowCode" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -105,7 +105,8 @@
                     You'll need it to access your album after this session.</p>
             </div>
 
-            <button class="btn-submit" onclick="createAlbum()">Create Album</button>
+            <!-- type="button" prevents page reload on click -->
+            <button type="button" class="btn-submit" onclick="createAlbum(event)">Create Album</button>
 
         </div>
     </div>
@@ -135,7 +136,7 @@
                         <div class="success-info-label">Access Code</div>
                         <div class="success-info-value" id="successCode">-</div>
                     </div>
-                    <button class="success-copy-btn" onclick="copySuccessCode()" title="Copy code">
+                    <button type="button" class="success-copy-btn" onclick="copySuccessCode()" title="Copy code">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2"/>
@@ -155,7 +156,9 @@
                 <span>This code will <strong>not be shown again</strong>. Screenshot or copy it before continuing.</span>
             </div>
 
-            <a href="upload-photos.html" class="btn-continue" id="continueBtn">Continue to Upload Photos →</a>
+            <!-- Changed from <a> to <button> to prevent unintended navigation -->
+            <button type="button" class="btn-continue" onclick="continueToUpload()">Continue to Upload Photos →</button>
+
         </div>
     </div>
 
