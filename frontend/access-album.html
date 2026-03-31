@@ -84,7 +84,7 @@
                                 autocomplete="off"
                                 style="padding-right: 44px; font-family: 'Courier New', monospace; letter-spacing: 2px;"
                             />
-                            <button class="pwd-toggle" id="pwdToggle" type="button" 
+                            <button type="button" class="pwd-toggle" id="pwdToggle"
                             title="Show / hide code" onclick="toggleVisibility()">
                                 <svg id="iconShow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -113,7 +113,8 @@
 
                 </div>
 
-                <button class="btn-submit" onclick="accessAlbum()">Access Album</button>
+                <!-- type="button" prevents page reload -->
+                <button type="button" class="btn-submit" onclick="accessAlbum(event)">Access Album</button>
 
             </div>
         </div>
@@ -139,7 +140,8 @@
                     <div class="login-album-info-value" id="confirmedAlbumName">-</div>
                 </div>
 
-                <a href="album-view.html" class="btn-continue">Open Album →</a>
+                <!-- Changed from <a> to <button> to prevent unintended navigation -->
+                <button type="button" class="btn-continue" onclick="window.location.href='album-view.html'">Open Album →</button>
 
             </div>
         </div>
